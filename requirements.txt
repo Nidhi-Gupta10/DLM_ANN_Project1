@@ -1,4 +1,4 @@
 streamlit
-geesetools
+sklearn
 tensorflow
 seaborn
