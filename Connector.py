@@ -1,26 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from model import build_ann, train_model  # Assuming model.py contains ANN functions
-
-def load_and_train_model(DATASET_FILE: str, target_variable: str, hyperparams: dict) -> tuple:
-    """
-    Loads the dataset, preprocesses it, and trains an ANN model using given hyperparameters.
-    
-    Args:
-        DATASET_FILE (str): Path to the dataset file.
-        hyperparams (dict): Dictionary containing ANN hyperparameters.
-    
-    Returns:
-        model: Trained ANN model.
-        history: Training history containing loss and accuracy metrics.
-    """
-    
-    # Load Dataset from local environment
-    df = pd.read_csv(DATASET_FILE)
-    
-    # Initialize Data Preprocessor
-  
-
 def custom_preprocess(dataframe, target_variable, train_test_split_percentage=80):
     """
     Performs data preprocessing, specifically splitting into train and test sets.
@@ -44,8 +24,28 @@ def custom_preprocess(dataframe, target_variable, train_test_split_percentage=80
     )
 
     return X_train, X_test, y_train, y_test
+def load_and_train_model(DATASET_FILE: str, target_variable: str, hyperparams: dict) -> tuple:
+    """
+    Loads the dataset, preprocesses it, and trains an ANN model using given hyperparameters.
+    
+    Args:
+        DATASET_FILE (str): Path to the dataset file.
+        hyperparams (dict): Dictionary containing ANN hyperparameters.
+    
+    Returns:
+        model: Trained ANN model.
+        history: Training history containing loss and accuracy metrics.
+    """
+    
+    # Load Dataset from local environment
+    df = pd.read_csv(DATASET_FILE)
+    
+    # Initialize Data Preprocessor
+  
 
-X_train, X_test, y_train, y_test = custom_preprocess(df, target_variable)
+
+
+    X_train, X_test, y_train, y_test = custom_preprocess(df, target_variable)
     
     # Build ANN Model
     model = build_ann(
