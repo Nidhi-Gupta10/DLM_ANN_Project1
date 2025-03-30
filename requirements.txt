@@ -1,4 +1,4 @@
 streamlit
-geesetools
+GeeseTools
 tensorflow
 seaborn
