@@ -1,5 +1,5 @@
 import pandas as pd
-import geesetools as gt
+from sklearn.model_selection import train_test_split
 from model import build_ann, train_model  # Assuming model.py contains ANN functions
 
 def load_and_train_model(DATASET_FILE: str, target_variable: str, hyperparams: dict) -> tuple:
@@ -19,14 +19,33 @@ def load_and_train_model(DATASET_FILE: str, target_variable: str, hyperparams: d
     df = pd.read_csv(DATASET_FILE)
     
     # Initialize Data Preprocessor
-    obj = gt(
-        dataframe=df,
-        target_variable=target_variable,
-        # train_test_split_percentage=hyperparams.get("train_test_split", 80)
+  
+
+def custom_preprocess(dataframe, target_variable, train_test_split_percentage=80):
+    """
+    Performs data preprocessing, specifically splitting into train and test sets.
+
+    Args:
+        dataframe (pd.DataFrame): The input DataFrame.
+        target_variable (str): The name of the target variable column.
+        train_test_split_percentage (int, optional): Percentage of data for training. Defaults to 80.
+
+    Returns:
+        tuple: X_train, X_test, y_train, y_test (pandas DataFrames/Series).
+    """
+
+    y = dataframe[target_variable]
+    X = dataframe.drop(columns=[target_variable])
+
+    train_size = train_test_split_percentage / 100.0
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, train_size=train_size, random_state=42  # Added random_state for reproducibility
     )
-    
-    # Perform preprocessing
-    X_train, X_test, y_train, y_test = obj.pre_process()
+
+    return X_train, X_test, y_train, y_test
+
+X_train, X_test, y_train, y_test = custom_preprocess(df, target_variable)
     
     # Build ANN Model
     model = build_ann(
