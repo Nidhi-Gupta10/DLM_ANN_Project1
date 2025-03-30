@@ -14,8 +14,8 @@ def custom_preprocess(dataframe, target_variable, train_test_split_percentage=80
         tuple: X_train, X_test, y_train, y_test (pandas DataFrames/Series).
     """
 
-    y = dataframe[[target_variable]]
-    X = dataframe.drop(columns=[target_variable])
+    y = pd.DataFrame(dataframe[[target_variable]])
+    X = pd.DataFrame(dataframe.drop(columns=[target_variable]))
 
     train_size = train_test_split_percentage / 100.0
 
