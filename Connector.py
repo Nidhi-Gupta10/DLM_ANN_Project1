@@ -45,7 +45,7 @@ def load_and_train_model(DATASET_FILE: str, target_variable: str, hyperparams: d
 
 
 
-    X_train, X_test, y_train, y_test = custom_preprocess(df, target_variable)
+    X_train, X_test, y_train, y_test = custom_preprocess(df, "Depression",)
     
     # Build ANN Model
     model = build_ann(
