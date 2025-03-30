@@ -1,5 +1,5 @@
 import pandas as pd
-import GeeseTools as gt
+import geesetools as gt
 from model import build_ann, train_model  # Assuming model.py contains ANN functions
 
 def load_and_train_model(DATASET_FILE: str, target_variable: str, hyperparams: dict) -> tuple:
